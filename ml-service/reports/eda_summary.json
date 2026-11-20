@@ -1,0 +1,452 @@
+{
+  "dataset_name": "eda_test_reviews.csv",
+  "total_raw_rows": 5,
+  "total_raw_columns": 6,
+  "total_clean_rows": 4,
+  "cleaning_report": {
+    "null_counts_raw": {
+      "product_name": 0,
+      "product_price": 0,
+      "Rate": 0,
+      "Review": 1,
+      "Summary": 0,
+      "Sentiment": 0
+    },
+    "corrupted_rate_rows_dropped": 1,
+    "exact_duplicate_rows_dropped": 0,
+    "text_duplicates_dropped": 0,
+    "conflicting_duplicate_texts": 0
+  },
+  "class_distribution": {
+    "raw_counts": {
+      "positive": 2,
+      "negative": 2,
+      "neutral": 1
+    },
+    "raw_percentages": {
+      "positive": 40.0,
+      "negative": 40.0,
+      "neutral": 20.0
+    },
+    "clean_counts": {
+      "positive": 2,
+      "negative": 1,
+      "neutral": 1
+    },
+    "clean_percentages": {
+      "positive": 50.0,
+      "negative": 25.0,
+      "neutral": 25.0
+    }
+  },
+  "rating_distribution": {
+    "counts": {
+      "1": 1,
+      "3": 1,
+      "4": 1,
+      "5": 1
+    },
+    "percentages": {
+      "1": 25.0,
+      "3": 25.0,
+      "4": 25.0,
+      "5": 25.0
+    }
+  },
+  "rating_vs_sentiment": {
+    "1": {
+      "positive": 0,
+      "neutral": 0,
+      "negative": 1
+    },
+    "3": {
+      "positive": 0,
+      "neutral": 1,
+      "negative": 0
+    },
+    "4": {
+      "positive": 1,
+      "neutral": 0,
+      "negative": 0
+    },
+    "5": {
+      "positive": 1,
+      "neutral": 0,
+      "negative": 0
+    }
+  },
+  "review_length_distribution": {
+    "all": {
+      "chars": {
+        "mean": 60.5,
+        "std": 15.26,
+        "median": 63.0,
+        "min": 42,
+        "max": 74,
+        "q25": 51.0,
+        "q75": 72.5
+      },
+      "words": {
+        "mean": 9.75,
+        "std": 2.22,
+        "median": 10.0,
+        "min": 7,
+        "max": 12,
+        "q25": 8.5,
+        "q75": 11.25
+      }
+    },
+    "by_sentiment": {
+      "positive": {
+        "chars": {
+          "mean": 58.0,
+          "std": 22.63,
+          "median": 58.0,
+          "min": 42,
+          "max": 74,
+          "q25": 50.0,
+          "q75": 66.0
+        },
+        "words": {
+          "mean": 9.5,
+          "std": 3.54,
+          "median": 9.5,
+          "min": 7,
+          "max": 12,
+          "q25": 8.25,
+          "q75": 10.75
+        }
+      },
+      "negative": {
+        "chars": {
+          "mean": 54.0,
+          "std": 0.0,
+          "median": 54.0,
+          "min": 54,
+          "max": 54,
+          "q25": 54.0,
+          "q75": 54.0
+        },
+        "words": {
+          "mean": 9.0,
+          "std": 0.0,
+          "median": 9.0,
+          "min": 9,
+          "max": 9,
+          "q25": 9.0,
+          "q75": 9.0
+        }
+      },
+      "neutral": {
+        "chars": {
+          "mean": 72.0,
+          "std": 0.0,
+          "median": 72.0,
+          "min": 72,
+          "max": 72,
+          "q25": 72.0,
+          "q75": 72.0
+        },
+        "words": {
+          "mean": 11.0,
+          "std": 0.0,
+          "median": 11.0,
+          "min": 11,
+          "max": 11,
+          "q25": 11.0,
+          "q75": 11.0
+        }
+      }
+    }
+  },
+  "top_words_per_sentiment": {
+    "positive": [
+      {
+        "word": "heats",
+        "count": 1
+      },
+      {
+        "word": "quickly",
+        "count": 1
+      },
+      {
+        "word": "decent",
+        "count": 1
+      },
+      {
+        "word": "build",
+        "count": 1
+      },
+      {
+        "word": "price",
+        "count": 1
+      },
+      {
+        "word": "great",
+        "count": 1
+      },
+      {
+        "word": "audio",
+        "count": 1
+      },
+      {
+        "word": "quality",
+        "count": 1
+      },
+      {
+        "word": "sound",
+        "count": 1
+      },
+      {
+        "word": "clarity",
+        "count": 1
+      },
+      {
+        "word": "wonderful",
+        "count": 1
+      },
+      {
+        "word": "battery",
+        "count": 1
+      },
+      {
+        "word": "lasts",
+        "count": 1
+      },
+      {
+        "word": "long",
+        "count": 1
+      }
+    ],
+    "negative": [
+      {
+        "word": "stopped",
+        "count": 1
+      },
+      {
+        "word": "working",
+        "count": 1
+      },
+      {
+        "word": "day",
+        "count": 1
+      },
+      {
+        "word": "customer",
+        "count": 1
+      },
+      {
+        "word": "service",
+        "count": 1
+      },
+      {
+        "word": "ignored",
+        "count": 1
+      }
+    ],
+    "neutral": [
+      {
+        "word": "average",
+        "count": 1
+      },
+      {
+        "word": "monitor",
+        "count": 1
+      },
+      {
+        "word": "screen",
+        "count": 1
+      },
+      {
+        "word": "okay",
+        "count": 1
+      },
+      {
+        "word": "basic",
+        "count": 1
+      },
+      {
+        "word": "tasks",
+        "count": 1
+      },
+      {
+        "word": "nothing",
+        "count": 1
+      },
+      {
+        "word": "exceptional",
+        "count": 1
+      }
+    ]
+  },
+  "word_cloud_data": {
+    "positive": [
+      {
+        "text": "heats",
+        "value": 1
+      },
+      {
+        "text": "quickly",
+        "value": 1
+      },
+      {
+        "text": "decent",
+        "value": 1
+      },
+      {
+        "text": "build",
+        "value": 1
+      },
+      {
+        "text": "price",
+        "value": 1
+      },
+      {
+        "text": "great",
+        "value": 1
+      },
+      {
+        "text": "audio",
+        "value": 1
+      },
+      {
+        "text": "quality",
+        "value": 1
+      },
+      {
+        "text": "sound",
+        "value": 1
+      },
+      {
+        "text": "clarity",
+        "value": 1
+      },
+      {
+        "text": "wonderful",
+        "value": 1
+      },
+      {
+        "text": "battery",
+        "value": 1
+      },
+      {
+        "text": "lasts",
+        "value": 1
+      },
+      {
+        "text": "long",
+        "value": 1
+      }
+    ],
+    "negative": [
+      {
+        "text": "stopped",
+        "value": 1
+      },
+      {
+        "text": "working",
+        "value": 1
+      },
+      {
+        "text": "day",
+        "value": 1
+      },
+      {
+        "text": "customer",
+        "value": 1
+      },
+      {
+        "text": "service",
+        "value": 1
+      },
+      {
+        "text": "ignored",
+        "value": 1
+      }
+    ],
+    "neutral": [
+      {
+        "text": "average",
+        "value": 1
+      },
+      {
+        "text": "monitor",
+        "value": 1
+      },
+      {
+        "text": "screen",
+        "value": 1
+      },
+      {
+        "text": "okay",
+        "value": 1
+      },
+      {
+        "text": "basic",
+        "value": 1
+      },
+      {
+        "text": "tasks",
+        "value": 1
+      },
+      {
+        "text": "nothing",
+        "value": 1
+      },
+      {
+        "text": "exceptional",
+        "value": 1
+      }
+    ]
+  },
+  "top_products": [
+    {
+      "product_name": "Noise Cancelling Wireless Headphones (Black)",
+      "total_reviews": 1,
+      "average_rating": 5.0,
+      "positive": 1,
+      "negative": 0,
+      "neutral": 0,
+      "positive_pct": 100.0,
+      "negative_pct": 0.0
+    },
+    {
+      "product_name": "Smart Fitness Watch",
+      "total_reviews": 1,
+      "average_rating": 1.0,
+      "positive": 0,
+      "negative": 1,
+      "neutral": 0,
+      "positive_pct": 0.0,
+      "negative_pct": 100.0
+    },
+    {
+      "product_name": "Nova Dry Iron (Grey)",
+      "total_reviews": 1,
+      "average_rating": 4.0,
+      "positive": 1,
+      "negative": 0,
+      "neutral": 0,
+      "positive_pct": 100.0,
+      "negative_pct": 0.0
+    },
+    {
+      "product_name": "Ultra HD 4K Monitor",
+      "total_reviews": 1,
+      "average_rating": 3.0,
+      "positive": 0,
+      "negative": 0,
+      "neutral": 1,
+      "positive_pct": 0.0,
+      "negative_pct": 0.0
+    }
+  ],
+  "key_findings": [
+    "Severe Class Imbalance: Positive reviews dominate at 40.0% raw (2 rows) and 50.0% clean (2 rows). Neutral reviews represent only 20.0% raw and 25.0% clean, requiring class-weighted loss and macro-averaged metrics.",
+    "Critical Duplicate Leakage Risk: Found 0 completely identical rows and 0 duplicates on (Review, Summary). Removing review text duplicates reduces the dataset from 5 to 4 unique reviews, preventing severe train/test data leakage.",
+    "Data Corruption Handled: Detected and removed 1 corrupted row(s) where product names shifted into the 'Rate' column.",
+    "Missing Review Titles vs. Detailed Summaries: 1 rows (20.0%) lacked a short 'Review' title, whereas only 0 rows lacked a 'Summary'. Using 'Summary' as primary review text guarantees informative review semantics.",
+    "Review Length by Sentiment: Dissatisfied customers express negative feedback with significantly longer text (average 9.0 words) compared to positive reviews (average 9.5 words), which often consist of terse praise (e.g., 'awesome', 'good product').",
+    "Label-Rating Discrepancies: While 5-star ratings are 100.0% positive, 0 reviews with 5 stars actually carry negative sentiment text, and 0 reviews with 1 star express positive sentiment, proving star ratings alone are insufficient as text sentiment proxies."
+  ]
+}
