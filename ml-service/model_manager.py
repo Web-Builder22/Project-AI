@@ -18,7 +18,9 @@ from config import MODELS_DIR, ARTIFACTS_DIR
 logger = logging.getLogger("ml-service.model_manager")
 
 METADATA_PATH = ARTIFACTS_DIR / "training_metadata.json"
+EVALUATION_PATH = ARTIFACTS_DIR / "evaluation.json"
 VECTORIZER_PATH = MODELS_DIR / "tfidf_vectorizer.joblib"
+BEST_MODEL_PATH = MODELS_DIR / "best_model.joblib"
 
 MODEL_FILENAMES = {
     "linear_svc": MODELS_DIR / "linear_svc.joblib",
@@ -58,6 +60,25 @@ def load_metadata() -> dict[str, Any] | None:
     except Exception as exc:
         logger.warning("Could not parse training metadata JSON: %s", exc)
         return None
+
+
+def load_evaluation() -> dict[str, Any] | None:
+    """Load Phase E evaluation JSON if it exists, else return None."""
+    if not EVALUATION_PATH.exists():
+        return None
+    try:
+        with open(EVALUATION_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as exc:
+        logger.warning("Could not parse evaluation JSON: %s", exc)
+        return None
+
+
+def load_best_pipeline():
+    """Load the full scikit-learn Pipeline (best_model.joblib). Raises FileNotFoundError if missing."""
+    if not BEST_MODEL_PATH.exists():
+        raise FileNotFoundError(f"Best model pipeline not found at '{BEST_MODEL_PATH}'. Run training first.")
+    return joblib.load(BEST_MODEL_PATH)
 
 
 def get_training_status() -> dict[str, Any]:

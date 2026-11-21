@@ -28,11 +28,36 @@ from training_config import TrainingConfig
 
 
 @pytest.fixture(autouse=True)
-def clean_model_artifacts():
-    """Clean model artifacts and metadata before and after each test."""
-    model_manager.clear_artifacts()
-    yield
-    model_manager.clear_artifacts()
+def isolate_model_artifacts(tmp_path: Path, monkeypatch):
+    """Isolate model artifacts in a temporary directory during test runs so production artifacts are never wiped."""
+    test_models = tmp_path / "models"
+    test_artifacts = tmp_path / "artifacts"
+    test_models.mkdir(parents=True, exist_ok=True)
+    test_artifacts.mkdir(parents=True, exist_ok=True)
+
+    monkeypatch.setattr(model_manager, "MODELS_DIR", test_models)
+    monkeypatch.setattr(model_manager, "ARTIFACTS_DIR", test_artifacts)
+    monkeypatch.setattr(model_manager, "METADATA_PATH", test_artifacts / "training_metadata.json")
+    monkeypatch.setattr(model_manager, "VECTORIZER_PATH", test_models / "tfidf_vectorizer.joblib")
+    monkeypatch.setattr(model_manager, "MODEL_FILENAMES", {
+        "linear_svc": test_models / "linear_svc.joblib",
+        "logistic_regression": test_models / "logistic_regression.joblib",
+        "random_forest": test_models / "random_forest.joblib",
+        "multinomial_nb": test_models / "multinomial_nb.joblib",
+    })
+    import config
+    import train
+    monkeypatch.setattr(config, "MODELS_DIR", test_models)
+    monkeypatch.setattr(config, "ARTIFACTS_DIR", test_artifacts)
+    monkeypatch.setattr(train, "MODELS_DIR", test_models)
+    monkeypatch.setattr(train, "METADATA_PATH", test_artifacts / "training_metadata.json")
+    monkeypatch.setattr(train, "VECTORIZER_PATH", test_models / "tfidf_vectorizer.joblib")
+    monkeypatch.setattr(train, "MODEL_FILENAMES", {
+        "linear_svc": test_models / "linear_svc.joblib",
+        "logistic_regression": test_models / "logistic_regression.joblib",
+        "random_forest": test_models / "random_forest.joblib",
+        "multinomial_nb": test_models / "multinomial_nb.joblib",
+    })
 
 
 @pytest.fixture

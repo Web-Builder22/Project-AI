@@ -64,10 +64,12 @@ def health():
 def models_status():
     """Report trained model artifacts status."""
     status_info = get_training_status()
+    metadata = status_info.get("metadata")
+    selected_model = metadata.get("best_model") if metadata else None
     return {
         "models_trained": status_info["has_trained"],
-        "trained_models": status_info["successful_models"] if "successful_models" in status_info else [],
-        "selected_model": None,
+        "trained_models": [k for k, v in status_info.get("models_exist", {}).items() if v and k != "best_model"],
+        "selected_model": selected_model,
         "details": status_info,
     }
 
