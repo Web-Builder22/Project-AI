@@ -1,0 +1,41 @@
+{
+  "dataset_filename": "reviews.csv",
+  "dataset_size_rows": 109490,
+  "training_samples_used": 87592,
+  "testing_samples_used": 21898,
+  "review_text_column": "full_text",
+  "sentiment_label_column": "Sentiment",
+  "class_names": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "class_distribution": {
+    "negative": 20791,
+    "neutral": 6012,
+    "positive": 82687
+  },
+  "best_model": {
+    "model_key": "linear_svc",
+    "display_name": "Linear SVM (Calibrated)",
+    "cv_macro_f1": 0.6963,
+    "train_oof_macro_f1_tuned": 0.7389,
+    "test_macro_f1": 0.7033,
+    "test_macro_f1_tuned": 0.7372,
+    "class_multipliers": {
+      "negative": 1.0,
+      "neutral": 2.9,
+      "positive": 1.0
+    },
+    "artifact": "best_model.joblib",
+    "selection_reason": "Linear SVM (Calibrated) with out-of-fold probability multiplier (2.90) was selected solely because it achieved the highest train out-of-fold (OOF) Macro F1 (0.7389) across all 87,592 training instances. The test set was held out and evaluated only once after final model selection was frozen (yielding 0.7372 test Macro F1, 90.45% accuracy, and 41.65% neutral recall). Bootstrap significance testing confirms that its performance difference with Logistic Regression is not statistically significant (95% CI [-0.0020, +0.0121] spans 0)."
+  },
+  "models_evaluated": [
+    "dummy_baseline",
+    "linear_svc",
+    "logistic_regression",
+    "multinomial_nb",
+    "random_forest"
+  ],
+  "training_timestamp_utc": "2026-11-21T17:26:27.009058+00:00"
+}

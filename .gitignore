@@ -1,3 +1,4 @@
+# Node / Frontend
 node_modules/
 build/
 dist/
@@ -6,3 +7,25 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+env/
+venv/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Dataset and model files
+ml-service/data/reviews.csv
+ml-service/data/*.csv
+!ml-service/data/README.md
+ml-service/models/*.joblib
+!ml-service/models/best_model.joblib
+*.env.local

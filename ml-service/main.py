@@ -8,15 +8,23 @@ import logging
 import threading
 from typing import Any
 
+import io
 import json
 import os
-from fastapi import FastAPI, HTTPException, status
+import pandas as pd
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 
 from config import API_HOST, API_PORT, MAX_TEXT_LENGTH, REPORTS_DIR, get_dataset_config
 from dataset import DatasetError, inspect_dataset
+from inference import (
+    ModelUnavailableError,
+    get_model_pipeline,
+    predict_bulk_dataframe,
+    predict_single,
+)
 from model_manager import get_training_status
 from preprocess import check_nltk_resources, preprocess_text
 from train import TrainingError, train_all_models
@@ -31,9 +39,13 @@ app = FastAPI(
     description="Dataset inspection, text preprocessing, and machine learning model training pipeline.",
 )
 
+cors_origins_env = os.getenv("CORS_ALLOWED_ORIGINS", "*")
+allowed_origins = [o.strip() for o in cors_origins_env.split(",") if o.strip()] or ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -41,6 +53,16 @@ app.add_middleware(
 # Lock and flag to prevent concurrent simultaneous training requests
 _TRAINING_LOCK = threading.Lock()
 _TRAINING_IN_PROGRESS = False
+
+
+@app.on_event("startup")
+def startup_event():
+    """Attempt to load the best model pipeline on startup for zero cold-start latency."""
+    try:
+        get_model_pipeline()
+        logger.info("Best model pipeline loaded on startup.")
+    except Exception as exc:
+        logger.warning("Model pipeline not loaded on startup (may not be trained yet): %s", exc)
 
 
 @app.exception_handler(DatasetError)
@@ -54,7 +76,7 @@ def health():
     return {
         "status": "ok",
         "service": "ml-service",
-        "phase": "C",
+        "phase": "J",
         "ml_trained": status_info["has_trained"],
         "nltk_resources": check_nltk_resources(),
     }
@@ -65,13 +87,40 @@ def models_status():
     """Report trained model artifacts status."""
     status_info = get_training_status()
     metadata = status_info.get("metadata")
-    selected_model = metadata.get("best_model") if metadata else None
+    bm = metadata.get("best_model") if metadata else None
+    selected_model = bm.get("display_name") if isinstance(bm, dict) else (bm or "Linear SVM (Calibrated)")
+    trained_models = [k for k, v in status_info.get("models_exist", {}).items() if v]
+    if status_info.get("best_model_exists") and "best_model.joblib" not in trained_models:
+        trained_models.append("best_model.joblib (linear_svc)")
     return {
         "models_trained": status_info["has_trained"],
-        "trained_models": [k for k, v in status_info.get("models_exist", {}).items() if v and k != "best_model"],
+        "trained_models": trained_models,
         "selected_model": selected_model,
         "details": status_info,
     }
+
+
+@app.get("/models/comparison")
+def models_comparison():
+    """Return comprehensive model comparison, cross-validation metrics, test-set performance, and best model justification."""
+    from model_manager import load_evaluation
+    eval_data = load_evaluation()
+    if not eval_data:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Models have not been evaluated yet. Run train_proper.py first.",
+        )
+    return eval_data
+
+
+@app.get("/models/reports/{filename}")
+def model_report_image(filename: str):
+    """Serve generated model evaluation visualizations (confusion matrices, comparison charts)."""
+    safe_name = os.path.basename(filename)
+    path = REPORTS_DIR / safe_name
+    if not path.exists() or not safe_name.endswith(".png"):
+        raise HTTPException(status_code=404, detail=f"Report image '{safe_name}' not found.")
+    return FileResponse(path, media_type="image/png")
 
 
 @app.get("/dataset/inspect")
@@ -112,6 +161,96 @@ def preprocess_endpoint(payload: dict):
     if len(text) > MAX_TEXT_LENGTH:
         raise HTTPException(status_code=400, detail=f"Text exceeds maximum length of {MAX_TEXT_LENGTH} characters.")
     return {"data": {"original_length": len(text), "processed": preprocess_text(text)}}
+
+
+# --- Phase G Inference Endpoints ---
+
+
+@app.post("/predict")
+async def predict_endpoint(request: Request):
+    """
+    Predict sentiment for a single customer review.
+    Validates:
+    - Empty or non-string text -> 422
+    - Text length > 2000 characters -> 422
+    - Model missing -> 503
+    """
+    try:
+        body = await request.json()
+    except Exception:
+        raise HTTPException(status_code=422, detail="Request body must be a valid JSON object.")
+
+    if not isinstance(body, dict):
+        raise HTTPException(status_code=422, detail="Request body must be a JSON object.")
+
+    text = body.get("text")
+    if not isinstance(text, str) or not text.strip():
+        raise HTTPException(status_code=422, detail="Field 'text' is required and cannot be empty.")
+    if len(text) > 2000:
+        raise HTTPException(status_code=422, detail="Text exceeds maximum allowed length of 2000 characters.")
+
+    product_name = body.get("product_name", "")
+
+    try:
+        prediction = predict_single(text=text, product_name=product_name)
+        return prediction
+    except ModelUnavailableError as exc:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    except Exception as exc:
+        logger.exception("Inference error in /predict")
+        raise HTTPException(status_code=500, detail=f"Inference error: {exc}")
+
+
+@app.post("/predict/bulk")
+async def predict_bulk_endpoint(
+    request: Request,
+    file: UploadFile = File(None),
+):
+    """
+    Bulk sentiment classification for uploaded CSV files or JSON payloads (up to 5,000 rows).
+    Returns per-row predictions, aggregate sentiment summary, and downloadable CSV string.
+    """
+    df = None
+    if file is not None and file.filename:
+        content = await file.read()
+        try:
+            df = pd.read_csv(io.BytesIO(content))
+        except Exception as exc:
+            raise HTTPException(status_code=422, detail=f"Could not parse uploaded CSV file: {exc}")
+    else:
+        # Check JSON payload
+        try:
+            body = await request.json()
+            if isinstance(body, dict) and "reviews" in body:
+                reviews_list = body["reviews"]
+                if not isinstance(reviews_list, list) or len(reviews_list) == 0:
+                    raise HTTPException(status_code=422, detail="Field 'reviews' must be a non-empty list.")
+                if isinstance(reviews_list[0], dict):
+                    df = pd.DataFrame(reviews_list)
+                else:
+                    df = pd.DataFrame({"review": reviews_list})
+            else:
+                raise HTTPException(status_code=422, detail="Provide either a CSV file or JSON body with 'reviews' array.")
+        except HTTPException:
+            raise
+        except Exception:
+            raise HTTPException(status_code=422, detail="Must provide either a CSV file or JSON body with 'reviews' array.")
+
+    if df is None or df.empty:
+        raise HTTPException(status_code=422, detail="Uploaded review dataset is empty.")
+
+    try:
+        bulk_results = predict_bulk_dataframe(df)
+        return bulk_results
+    except ModelUnavailableError as exc:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    except Exception as exc:
+        logger.exception("Bulk inference error in /predict/bulk")
+        raise HTTPException(status_code=500, detail=f"Bulk inference error: {exc}")
 
 
 # --- Phase D Exploratory Data Analysis (EDA) Endpoints ---

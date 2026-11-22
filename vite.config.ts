@@ -36,6 +36,16 @@ export default defineConfig(() => {
     server: {
       host: '0.0.0.0',
       port: 3000,
+      proxy: {
+        '/api': {
+          target: `http://127.0.0.1:${
+            process.env.ML_API_PORT ||
+            (fs.existsSync('/app/control-plane-api/control-plane-api') ? 8001 : 8000)
+          }`,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',

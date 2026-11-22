@@ -193,5 +193,5 @@ def get_dataset_config() -> DatasetConfig:
 # --- Service settings ---
 
 API_HOST = os.getenv("ML_API_HOST", "0.0.0.0")
-API_PORT = int(os.getenv("ML_API_PORT", "8000"))
+API_PORT = int(os.getenv("PORT", os.getenv("ML_API_PORT", "8000")))
 MAX_TEXT_LENGTH = int(os.getenv("MAX_REVIEW_CHARS", "5000"))

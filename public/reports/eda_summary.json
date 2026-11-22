@@ -1,0 +1,1256 @@
+{
+  "dataset_name": "reviews.csv",
+  "total_raw_rows": 205052,
+  "total_raw_columns": 6,
+  "total_clean_rows": 109490,
+  "cleaning_report": {
+    "null_counts_raw": {
+      "product_name": 0,
+      "product_price": 0,
+      "Rate": 0,
+      "Review": 24664,
+      "Summary": 11,
+      "Sentiment": 0
+    },
+    "corrupted_rate_rows_dropped": 3,
+    "exact_duplicate_rows_dropped": 34375,
+    "text_duplicates_dropped": 94563,
+    "conflicting_duplicate_texts": 996,
+    "conflicting_rows_dropped": 27284
+  },
+  "class_distribution": {
+    "raw_counts": {
+      "positive": 166581,
+      "negative": 28232,
+      "neutral": 10239
+    },
+    "raw_percentages": {
+      "positive": 81.24,
+      "negative": 13.77,
+      "neutral": 4.99
+    },
+    "clean_counts": {
+      "positive": 82687,
+      "negative": 20791,
+      "neutral": 6012
+    },
+    "clean_percentages": {
+      "positive": 75.52,
+      "negative": 18.99,
+      "neutral": 5.49
+    }
+  },
+  "rating_distribution": {
+    "counts": {
+      "1": 15422,
+      "2": 4871,
+      "3": 9271,
+      "4": 20285,
+      "5": 60637
+    },
+    "percentages": {
+      "1": 13.96,
+      "2": 4.41,
+      "3": 8.39,
+      "4": 18.36,
+      "5": 54.88
+    }
+  },
+  "rating_vs_sentiment": {
+    "1": {
+      "positive": 1032,
+      "neutral": 1025,
+      "negative": 13365
+    },
+    "2": {
+      "positive": 569,
+      "neutral": 778,
+      "negative": 3524
+    },
+    "3": {
+      "positive": 4641,
+      "neutral": 2094,
+      "negative": 2536
+    },
+    "4": {
+      "positive": 18292,
+      "neutral": 1186,
+      "negative": 807
+    },
+    "5": {
+      "positive": 58550,
+      "neutral": 1347,
+      "negative": 740
+    }
+  },
+  "review_length_distribution": {
+    "all": {
+      "chars": {
+        "mean": 78.17,
+        "std": 85.63,
+        "median": 47.0,
+        "min": 2,
+        "max": 616,
+        "q25": 31.0,
+        "q75": 85.0
+      },
+      "words": {
+        "mean": 13.76,
+        "std": 15.73,
+        "median": 8.0,
+        "min": 1,
+        "max": 113,
+        "q25": 5.0,
+        "q75": 15.0
+      }
+    },
+    "by_sentiment": {
+      "positive": {
+        "chars": {
+          "mean": 78.46,
+          "std": 87.07,
+          "median": 47.0,
+          "min": 2,
+          "max": 616,
+          "q25": 31.0,
+          "q75": 85.0
+        },
+        "words": {
+          "mean": 13.75,
+          "std": 15.99,
+          "median": 8.0,
+          "min": 1,
+          "max": 113,
+          "q25": 5.0,
+          "q75": 15.0
+        }
+      },
+      "negative": {
+        "chars": {
+          "mean": 83.26,
+          "std": 84.5,
+          "median": 53.0,
+          "min": 3,
+          "max": 575,
+          "q25": 35.0,
+          "q75": 94.0
+        },
+        "words": {
+          "mean": 14.79,
+          "std": 15.53,
+          "median": 9.0,
+          "min": 1,
+          "max": 113,
+          "q25": 6.0,
+          "q75": 17.0
+        }
+      },
+      "neutral": {
+        "chars": {
+          "mean": 57.81,
+          "std": 65.32,
+          "median": 38.0,
+          "min": 2,
+          "max": 533,
+          "q25": 25.0,
+          "q75": 63.0
+        },
+        "words": {
+          "mean": 10.46,
+          "std": 12.18,
+          "median": 7.0,
+          "min": 1,
+          "max": 104,
+          "q25": 4.0,
+          "q75": 11.0
+        }
+      }
+    }
+  },
+  "top_words_per_sentiment": {
+    "positive": [
+      {
+        "word": "good",
+        "count": 7980
+      },
+      {
+        "word": "product",
+        "count": 7722
+      },
+      {
+        "word": "very",
+        "count": 4473
+      },
+      {
+        "word": "nice",
+        "count": 3666
+      },
+      {
+        "word": "quality",
+        "count": 2609
+      },
+      {
+        "word": "best",
+        "count": 1972
+      },
+      {
+        "word": "awesome",
+        "count": 1878
+      },
+      {
+        "word": "not",
+        "count": 1540
+      },
+      {
+        "word": "but",
+        "count": 1532
+      },
+      {
+        "word": "money",
+        "count": 1456
+      },
+      {
+        "word": "price",
+        "count": 1336
+      },
+      {
+        "word": "worth",
+        "count": 1333
+      },
+      {
+        "word": "flipkart",
+        "count": 1322
+      },
+      {
+        "word": "buy",
+        "count": 1266
+      },
+      {
+        "word": "purchase",
+        "count": 1224
+      },
+      {
+        "word": "super",
+        "count": 1198
+      },
+      {
+        "word": "great",
+        "count": 1145
+      },
+      {
+        "word": "excellent",
+        "count": 1066
+      },
+      {
+        "word": "terrific",
+        "count": 1042
+      },
+      {
+        "word": "so",
+        "count": 986
+      }
+    ],
+    "negative": [
+      {
+        "word": "not",
+        "count": 9090
+      },
+      {
+        "word": "product",
+        "count": 6669
+      },
+      {
+        "word": "very",
+        "count": 5142
+      },
+      {
+        "word": "quality",
+        "count": 3631
+      },
+      {
+        "word": "good",
+        "count": 3320
+      },
+      {
+        "word": "bad",
+        "count": 3232
+      },
+      {
+        "word": "money",
+        "count": 2677
+      },
+      {
+        "word": "waste",
+        "count": 2362
+      },
+      {
+        "word": "worst",
+        "count": 1977
+      },
+      {
+        "word": "but",
+        "count": 1908
+      },
+      {
+        "word": "dont",
+        "count": 1883
+      },
+      {
+        "word": "poor",
+        "count": 1843
+      },
+      {
+        "word": "buy",
+        "count": 1803
+      },
+      {
+        "word": "working",
+        "count": 1395
+      },
+      {
+        "word": "no",
+        "count": 1318
+      },
+      {
+        "word": "disappointed",
+        "count": 1245
+      },
+      {
+        "word": "one",
+        "count": 883
+      },
+      {
+        "word": "experience",
+        "count": 881
+      },
+      {
+        "word": "so",
+        "count": 864
+      },
+      {
+        "word": "better",
+        "count": 841
+      }
+    ],
+    "neutral": [
+      {
+        "word": "product",
+        "count": 2136
+      },
+      {
+        "word": "not",
+        "count": 2091
+      },
+      {
+        "word": "good",
+        "count": 1911
+      },
+      {
+        "word": "but",
+        "count": 1319
+      },
+      {
+        "word": "very",
+        "count": 1134
+      },
+      {
+        "word": "quality",
+        "count": 938
+      },
+      {
+        "word": "ok",
+        "count": 709
+      },
+      {
+        "word": "nice",
+        "count": 671
+      },
+      {
+        "word": "okay",
+        "count": 519
+      },
+      {
+        "word": "small",
+        "count": 503
+      },
+      {
+        "word": "money",
+        "count": 454
+      },
+      {
+        "word": "size",
+        "count": 404
+      },
+      {
+        "word": "so",
+        "count": 343
+      },
+      {
+        "word": "job",
+        "count": 332
+      },
+      {
+        "word": "decent",
+        "count": 326
+      },
+      {
+        "word": "too",
+        "count": 314
+      },
+      {
+        "word": "price",
+        "count": 312
+      },
+      {
+        "word": "bad",
+        "count": 286
+      },
+      {
+        "word": "buy",
+        "count": 286
+      },
+      {
+        "word": "better",
+        "count": 272
+      }
+    ]
+  },
+  "word_cloud_data": {
+    "positive": [
+      {
+        "text": "good",
+        "value": 7980
+      },
+      {
+        "text": "product",
+        "value": 7722
+      },
+      {
+        "text": "very",
+        "value": 4473
+      },
+      {
+        "text": "nice",
+        "value": 3666
+      },
+      {
+        "text": "quality",
+        "value": 2609
+      },
+      {
+        "text": "best",
+        "value": 1972
+      },
+      {
+        "text": "awesome",
+        "value": 1878
+      },
+      {
+        "text": "not",
+        "value": 1540
+      },
+      {
+        "text": "but",
+        "value": 1532
+      },
+      {
+        "text": "money",
+        "value": 1456
+      },
+      {
+        "text": "price",
+        "value": 1336
+      },
+      {
+        "text": "worth",
+        "value": 1333
+      },
+      {
+        "text": "flipkart",
+        "value": 1322
+      },
+      {
+        "text": "buy",
+        "value": 1266
+      },
+      {
+        "text": "purchase",
+        "value": 1224
+      },
+      {
+        "text": "super",
+        "value": 1198
+      },
+      {
+        "text": "great",
+        "value": 1145
+      },
+      {
+        "text": "excellent",
+        "value": 1066
+      },
+      {
+        "text": "terrific",
+        "value": 1042
+      },
+      {
+        "text": "so",
+        "value": 986
+      },
+      {
+        "text": "really",
+        "value": 919
+      },
+      {
+        "text": "wonderful",
+        "value": 893
+      },
+      {
+        "text": "value",
+        "value": 889
+      },
+      {
+        "text": "must",
+        "value": 837
+      },
+      {
+        "text": "perfect",
+        "value": 829
+      },
+      {
+        "text": "happy",
+        "value": 733
+      },
+      {
+        "text": "also",
+        "value": 723
+      },
+      {
+        "text": "one",
+        "value": 703
+      },
+      {
+        "text": "like",
+        "value": 691
+      },
+      {
+        "text": "delivery",
+        "value": 665
+      },
+      {
+        "text": "sound",
+        "value": 657
+      },
+      {
+        "text": "every",
+        "value": 648
+      },
+      {
+        "text": "thanks",
+        "value": 606
+      },
+      {
+        "text": "recommended",
+        "value": 604
+      },
+      {
+        "text": "go",
+        "value": 598
+      },
+      {
+        "text": "simply",
+        "value": 596
+      },
+      {
+        "text": "wow",
+        "value": 590
+      },
+      {
+        "text": "brilliant",
+        "value": 585
+      },
+      {
+        "text": "fabulous",
+        "value": 585
+      },
+      {
+        "text": "market",
+        "value": 584
+      },
+      {
+        "text": "highly",
+        "value": 580
+      },
+      {
+        "text": "use",
+        "value": 577
+      },
+      {
+        "text": "mind",
+        "value": 572
+      },
+      {
+        "text": "penny",
+        "value": 560
+      },
+      {
+        "text": "classy",
+        "value": 558
+      },
+      {
+        "text": "blowing",
+        "value": 553
+      },
+      {
+        "text": "thank",
+        "value": 545
+      },
+      {
+        "text": "amazing",
+        "value": 544
+      },
+      {
+        "text": "specified",
+        "value": 508
+      },
+      {
+        "text": "love",
+        "value": 486
+      },
+      {
+        "text": "working",
+        "value": 458
+      },
+      {
+        "text": "time",
+        "value": 444
+      },
+      {
+        "text": "much",
+        "value": 414
+      },
+      {
+        "text": "no",
+        "value": 410
+      },
+      {
+        "text": "too",
+        "value": 403
+      },
+      {
+        "text": "range",
+        "value": 390
+      },
+      {
+        "text": "well",
+        "value": 390
+      },
+      {
+        "text": "easy",
+        "value": 385
+      },
+      {
+        "text": "installation",
+        "value": 384
+      },
+      {
+        "text": "pretty",
+        "value": 361
+      }
+    ],
+    "negative": [
+      {
+        "text": "not",
+        "value": 9090
+      },
+      {
+        "text": "product",
+        "value": 6669
+      },
+      {
+        "text": "very",
+        "value": 5142
+      },
+      {
+        "text": "quality",
+        "value": 3631
+      },
+      {
+        "text": "good",
+        "value": 3320
+      },
+      {
+        "text": "bad",
+        "value": 3232
+      },
+      {
+        "text": "money",
+        "value": 2677
+      },
+      {
+        "text": "waste",
+        "value": 2362
+      },
+      {
+        "text": "worst",
+        "value": 1977
+      },
+      {
+        "text": "but",
+        "value": 1908
+      },
+      {
+        "text": "dont",
+        "value": 1883
+      },
+      {
+        "text": "poor",
+        "value": 1843
+      },
+      {
+        "text": "buy",
+        "value": 1803
+      },
+      {
+        "text": "working",
+        "value": 1395
+      },
+      {
+        "text": "no",
+        "value": 1318
+      },
+      {
+        "text": "disappointed",
+        "value": 1245
+      },
+      {
+        "text": "one",
+        "value": 883
+      },
+      {
+        "text": "experience",
+        "value": 881
+      },
+      {
+        "text": "so",
+        "value": 864
+      },
+      {
+        "text": "better",
+        "value": 841
+      },
+      {
+        "text": "useless",
+        "value": 784
+      },
+      {
+        "text": "ever",
+        "value": 781
+      },
+      {
+        "text": "time",
+        "value": 698
+      },
+      {
+        "text": "low",
+        "value": 677
+      },
+      {
+        "text": "recommended",
+        "value": 674
+      },
+      {
+        "text": "terrible",
+        "value": 645
+      },
+      {
+        "text": "flipkart",
+        "value": 641
+      },
+      {
+        "text": "worthless",
+        "value": 639
+      },
+      {
+        "text": "horrible",
+        "value": 638
+      },
+      {
+        "text": "utterly",
+        "value": 621
+      },
+      {
+        "text": "expectations",
+        "value": 610
+      },
+      {
+        "text": "also",
+        "value": 609
+      },
+      {
+        "text": "rubbish",
+        "value": 605
+      },
+      {
+        "text": "use",
+        "value": 604
+      },
+      {
+        "text": "don't",
+        "value": 599
+      },
+      {
+        "text": "hated",
+        "value": 597
+      },
+      {
+        "text": "absolute",
+        "value": 594
+      },
+      {
+        "text": "expected",
+        "value": 587
+      },
+      {
+        "text": "meet",
+        "value": 581
+      },
+      {
+        "text": "unsatisfactory",
+        "value": 571
+      },
+      {
+        "text": "too",
+        "value": 557
+      },
+      {
+        "text": "specified",
+        "value": 547
+      },
+      {
+        "text": "nice",
+        "value": 544
+      },
+      {
+        "text": "small",
+        "value": 509
+      },
+      {
+        "text": "sound",
+        "value": 501
+      },
+      {
+        "text": "days",
+        "value": 473
+      },
+      {
+        "text": "even",
+        "value": 446
+      },
+      {
+        "text": "like",
+        "value": 431
+      },
+      {
+        "text": "size",
+        "value": 420
+      },
+      {
+        "text": "got",
+        "value": 415
+      },
+      {
+        "text": "properly",
+        "value": 411
+      },
+      {
+        "text": "problem",
+        "value": 409
+      },
+      {
+        "text": "water",
+        "value": 409
+      },
+      {
+        "text": "much",
+        "value": 399
+      },
+      {
+        "text": "month",
+        "value": 386
+      },
+      {
+        "text": "price",
+        "value": 378
+      },
+      {
+        "text": "slightly",
+        "value": 375
+      },
+      {
+        "text": "purchase",
+        "value": 374
+      },
+      {
+        "text": "service",
+        "value": 368
+      },
+      {
+        "text": "installation",
+        "value": 364
+      }
+    ],
+    "neutral": [
+      {
+        "text": "product",
+        "value": 2136
+      },
+      {
+        "text": "not",
+        "value": 2091
+      },
+      {
+        "text": "good",
+        "value": 1911
+      },
+      {
+        "text": "but",
+        "value": 1319
+      },
+      {
+        "text": "very",
+        "value": 1134
+      },
+      {
+        "text": "quality",
+        "value": 938
+      },
+      {
+        "text": "ok",
+        "value": 709
+      },
+      {
+        "text": "nice",
+        "value": 671
+      },
+      {
+        "text": "okay",
+        "value": 519
+      },
+      {
+        "text": "small",
+        "value": 503
+      },
+      {
+        "text": "money",
+        "value": 454
+      },
+      {
+        "text": "size",
+        "value": 404
+      },
+      {
+        "text": "so",
+        "value": 343
+      },
+      {
+        "text": "job",
+        "value": 332
+      },
+      {
+        "text": "decent",
+        "value": 326
+      },
+      {
+        "text": "too",
+        "value": 314
+      },
+      {
+        "text": "price",
+        "value": 312
+      },
+      {
+        "text": "bad",
+        "value": 286
+      },
+      {
+        "text": "buy",
+        "value": 286
+      },
+      {
+        "text": "better",
+        "value": 272
+      },
+      {
+        "text": "average",
+        "value": 271
+      },
+      {
+        "text": "fair",
+        "value": 270
+      },
+      {
+        "text": "specified",
+        "value": 253
+      },
+      {
+        "text": "working",
+        "value": 241
+      },
+      {
+        "text": "one",
+        "value": 225
+      },
+      {
+        "text": "expected",
+        "value": 202
+      },
+      {
+        "text": "worth",
+        "value": 202
+      },
+      {
+        "text": "awesome",
+        "value": 190
+      },
+      {
+        "text": "value",
+        "value": 189
+      },
+      {
+        "text": "disappointed",
+        "value": 182
+      },
+      {
+        "text": "dont",
+        "value": 179
+      },
+      {
+        "text": "use",
+        "value": 179
+      },
+      {
+        "text": "much",
+        "value": 174
+      },
+      {
+        "text": "purchase",
+        "value": 172
+      },
+      {
+        "text": "really",
+        "value": 171
+      },
+      {
+        "text": "time",
+        "value": 158
+      },
+      {
+        "text": "best",
+        "value": 156
+      },
+      {
+        "text": "wonderful",
+        "value": 147
+      },
+      {
+        "text": "recommended",
+        "value": 144
+      },
+      {
+        "text": "could",
+        "value": 143
+      },
+      {
+        "text": "more",
+        "value": 141
+      },
+      {
+        "text": "high",
+        "value": 140
+      },
+      {
+        "text": "sound",
+        "value": 136
+      },
+      {
+        "text": "moderate",
+        "value": 131
+      },
+      {
+        "text": "no",
+        "value": 131
+      },
+      {
+        "text": "must",
+        "value": 130
+      },
+      {
+        "text": "delivery",
+        "value": 130
+      },
+      {
+        "text": "little",
+        "value": 125
+      },
+      {
+        "text": "way",
+        "value": 123
+      },
+      {
+        "text": "pretty",
+        "value": 122
+      },
+      {
+        "text": "ball",
+        "value": 119
+      },
+      {
+        "text": "like",
+        "value": 118
+      },
+      {
+        "text": "also",
+        "value": 118
+      },
+      {
+        "text": "poor",
+        "value": 116
+      },
+      {
+        "text": "waste",
+        "value": 115
+      },
+      {
+        "text": "great",
+        "value": 115
+      },
+      {
+        "text": "slightly",
+        "value": 113
+      },
+      {
+        "text": "terrific",
+        "value": 113
+      },
+      {
+        "text": "light",
+        "value": 113
+      },
+      {
+        "text": "properly",
+        "value": 112
+      }
+    ]
+  },
+  "top_products": [
+    {
+      "product_name": "cello Pack of 18 Opalware Cello Dazzle Lush Fiesta Opalware Dinner Set, 18 Pieces Dinner Set \u0082 \u0082 (White, Microwave Safe)",
+      "total_reviews": 3156,
+      "average_rating": 4.2,
+      "positive": 2562,
+      "negative": 522,
+      "neutral": 72,
+      "positive_pct": 81.2,
+      "negative_pct": 16.5
+    },
+    {
+      "product_name": "Lakm Eyeconic Kajal Twin Pack (Deep Black, 0.7 g)",
+      "total_reviews": 2866,
+      "average_rating": 4.49,
+      "positive": 2602,
+      "negative": 162,
+      "neutral": 102,
+      "positive_pct": 90.8,
+      "negative_pct": 5.7
+    },
+    {
+      "product_name": "Mi 5A 80 cm (32 inch) HD Ready LED Smart Android TV with Dolby Audio (2022 Model)",
+      "total_reviews": 1902,
+      "average_rating": 4.09,
+      "positive": 1503,
+      "negative": 364,
+      "neutral": 35,
+      "positive_pct": 79.0,
+      "negative_pct": 19.1
+    },
+    {
+      "product_name": "Canon EOS 3000D DSLR Camera 1 Camera Body, 18 - 55 mm Lens (Black)",
+      "total_reviews": 1458,
+      "average_rating": 4.44,
+      "positive": 1273,
+      "negative": 121,
+      "neutral": 64,
+      "positive_pct": 87.3,
+      "negative_pct": 8.3
+    },
+    {
+      "product_name": "Singer FM 1409 Electric Sewing Machine\u00d0\u0093\u00d2\u0093?\u00d0\u0093\u00d3\u00ae\u00d0\u0092 \u00d0\u0093\u00d2\u0093?\u00d0\u0093\u00d3\u00ae\u00d0\u0092 ( Built-in Stitches 9)",
+      "total_reviews": 1329,
+      "average_rating": 4.29,
+      "positive": 1123,
+      "negative": 170,
+      "neutral": 36,
+      "positive_pct": 84.5,
+      "negative_pct": 12.8
+    },
+    {
+      "product_name": "NIVIA Storm Football - Size: 5\u00d0\u0093\u00d3\u00ae\u00d0\u0092 \u00d0\u0093\u00d3\u00ae\u00d0\u0092 (Pack of 1, Multicolor)",
+      "total_reviews": 1242,
+      "average_rating": 4.03,
+      "positive": 792,
+      "negative": 237,
+      "neutral": 213,
+      "positive_pct": 63.8,
+      "negative_pct": 19.1
+    },
+    {
+      "product_name": "POCO C31 (Royal Blue, 64 GB)?\u00d0\u0093\u00d2\u0093\u00d0\u0092\u00d2\u009d?\u00d0\u0093\u00d2\u0093\u00d0\u0092\u00d2\u009d(4 GB RAM)",
+      "total_reviews": 1149,
+      "average_rating": 3.7,
+      "positive": 799,
+      "negative": 311,
+      "neutral": 39,
+      "positive_pct": 69.5,
+      "negative_pct": 27.1
+    },
+    {
+      "product_name": "DOMS Pencil Smart Kit",
+      "total_reviews": 1097,
+      "average_rating": 4.73,
+      "positive": 1061,
+      "negative": 22,
+      "neutral": 14,
+      "positive_pct": 96.7,
+      "negative_pct": 2.0
+    },
+    {
+      "product_name": "AGARO Regal Hand-held Vacuum Cleaner\u00d0\u0093\u00d2\u0093?\u00d0\u0093\u00d3\u00ae\u00d0\u0092 \u00d0\u0093\u00d2\u0093?\u00d0\u0093\u00d3\u00ae\u00d0\u0092 (Black)",
+      "total_reviews": 1087,
+      "average_rating": 4.0,
+      "positive": 856,
+      "negative": 203,
+      "neutral": 28,
+      "positive_pct": 78.7,
+      "negative_pct": 18.7
+    },
+    {
+      "product_name": "Google Nest Mini (2nd Gen) with Google Assistant Smart Speaker (Chalk)",
+      "total_reviews": 1083,
+      "average_rating": 3.91,
+      "positive": 800,
+      "negative": 222,
+      "neutral": 61,
+      "positive_pct": 73.9,
+      "negative_pct": 20.5
+    }
+  ],
+  "key_findings": [
+    "Severe Class Imbalance: Positive reviews dominate at 81.24% raw (166,581 rows) and 75.2% clean (83,084 rows). Neutral reviews represent only 4.99% raw and 5.82% clean, requiring class-weighted loss and macro-averaged metrics.",
+    "Critical Duplicate Leakage Risk: Found 34,375 completely identical rows and 94,294 duplicates on (Review, Summary). Removing review text duplicates reduces the dataset from 205,052 to 110,486 unique reviews, preventing severe train/test data leakage.",
+    "Data Corruption Handled: Detected and removed 3 corrupted row(s) where product names shifted into the 'Rate' column.",
+    "Missing Review Titles vs. Detailed Summaries: 24,664 rows (12.0%) lacked a short 'Review' title, whereas only 11 rows lacked a 'Summary'. Using 'Summary' as primary review text guarantees informative review semantics.",
+    "Review Length by Sentiment: Dissatisfied customers express negative feedback with significantly longer text (average 14.8 words) compared to positive reviews (average 13.8 words), which often consist of terse praise (e.g., 'awesome', 'good product').",
+    "Label-Rating Discrepancies: While 5-star ratings are 96.6% positive, 740 reviews with 5 stars actually carry negative sentiment text, and 1032 reviews with 1 star express positive sentiment, proving star ratings alone are insufficient as text sentiment proxies."
+  ]
+}

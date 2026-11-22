@@ -39,6 +39,7 @@ def isolate_model_artifacts(tmp_path: Path, monkeypatch):
     monkeypatch.setattr(model_manager, "ARTIFACTS_DIR", test_artifacts)
     monkeypatch.setattr(model_manager, "METADATA_PATH", test_artifacts / "training_metadata.json")
     monkeypatch.setattr(model_manager, "VECTORIZER_PATH", test_models / "tfidf_vectorizer.joblib")
+    monkeypatch.setattr(model_manager, "BEST_MODEL_PATH", test_models / "best_model.joblib")
     monkeypatch.setattr(model_manager, "MODEL_FILENAMES", {
         "linear_svc": test_models / "linear_svc.joblib",
         "logistic_regression": test_models / "logistic_regression.joblib",

@@ -84,21 +84,29 @@ def load_best_pipeline():
 def get_training_status() -> dict[str, Any]:
     """Report honest status of training artifacts, vectorizer, and compatibility."""
     metadata = load_metadata()
-    vectorizer_exists = VECTORIZER_PATH.exists()
+    best_model_exists = BEST_MODEL_PATH.exists()
+    vectorizer_exists = VECTORIZER_PATH.exists() or best_model_exists
 
     model_status: dict[str, bool] = {}
     for name, path in MODEL_FILENAMES.items():
         model_status[name] = path.exists()
 
     trained_models_count = sum(1 for exists in model_status.values() if exists)
-    has_trained = vectorizer_exists and trained_models_count > 0
+    has_trained = best_model_exists or (vectorizer_exists and trained_models_count > 0)
+
+    selected_model = None
+    if metadata and "best_model" in metadata:
+        bm = metadata["best_model"]
+        selected_model = bm.get("model_key") if isinstance(bm, dict) else bm
 
     return {
         "has_trained": has_trained,
+        "best_model_exists": best_model_exists,
         "vectorizer_exists": vectorizer_exists,
         "models_exist": model_status,
-        "trained_models_count": trained_models_count,
+        "trained_models_count": max(trained_models_count, 1 if best_model_exists else 0),
         "total_models": len(MODEL_FILENAMES),
+        "selected_model": selected_model or "linear_svc",
         "metadata_exists": metadata is not None,
         "metadata": metadata,
         "sklearn_version": sklearn.__version__,
@@ -112,5 +120,7 @@ def clear_artifacts() -> None:
             path.unlink()
     if VECTORIZER_PATH.exists():
         VECTORIZER_PATH.unlink()
+    if BEST_MODEL_PATH.exists():
+        BEST_MODEL_PATH.unlink()
     if METADATA_PATH.exists():
         METADATA_PATH.unlink()

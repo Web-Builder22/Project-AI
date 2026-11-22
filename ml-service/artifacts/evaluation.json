@@ -1,0 +1,833 @@
+{
+  "dataset_report": {
+    "raw_rows": 205052,
+    "corrupted_rate_rows_dropped": 3,
+    "conflicting_duplicate_texts_dropped": 996,
+    "conflicting_rows_dropped": 27284,
+    "final_clean_rows": 109490,
+    "class_counts": {
+      "negative": 20791,
+      "neutral": 6012,
+      "positive": 82687
+    },
+    "class_percentages": {
+      "negative": 18.99,
+      "neutral": 5.49,
+      "positive": 75.52
+    }
+  },
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "train_samples": 87592,
+    "test_samples": 21898
+  },
+  "hyperparameter_grids": {
+    "LinearSVC": {
+      "search_grid": {
+        "C": [
+          0.1,
+          0.5,
+          1.0,
+          5.0
+        ],
+        "class_weight": [
+          "balanced",
+          null
+        ]
+      },
+      "best_hyperparameters": {
+        "C": 0.1,
+        "class_weight": "balanced",
+        "calibrated": true
+      }
+    },
+    "LogisticRegression": {
+      "search_grid": {
+        "C": [
+          0.1,
+          0.5,
+          1.0,
+          5.0
+        ],
+        "class_weight": [
+          "balanced",
+          null
+        ]
+      },
+      "best_hyperparameters": {
+        "C": 5.0,
+        "class_weight": null
+      }
+    },
+    "MultinomialNB": {
+      "search_grid": {
+        "alpha": [
+          0.1,
+          0.5,
+          1.0
+        ]
+      },
+      "best_hyperparameters": {
+        "alpha": 0.1
+      }
+    },
+    "RandomForest": {
+      "search_grid": {
+        "n_estimators": [
+          50
+        ],
+        "max_depth": [
+          20
+        ],
+        "class_weight": [
+          "balanced"
+        ]
+      },
+      "best_hyperparameters": {
+        "n_estimators": 50,
+        "max_depth": 20,
+        "class_weight": "balanced"
+      },
+      "subsample_size": 15000,
+      "sampling_method": "Stratified random subsample drawn from 87,592 train partition"
+    },
+    "DummyClassifier": {
+      "strategy": "most_frequent"
+    }
+  },
+  "models": {
+    "dummy_baseline": {
+      "display_name": "Majority Class Baseline",
+      "model_type": "DummyClassifier",
+      "best_hyperparameters": {
+        "strategy": "most_frequent"
+      },
+      "cv_macro_f1_mean": 0.2868,
+      "cv_macro_f1_std": 0.0,
+      "test_metrics": {
+        "accuracy": 0.7552,
+        "macro_precision": 0.2517,
+        "macro_recall": 0.3333,
+        "macro_f1": 0.2868,
+        "weighted_f1": 0.6498,
+        "per_class": {
+          "negative": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 4158
+          },
+          "neutral": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1203
+          },
+          "positive": {
+            "precision": 0.7552,
+            "recall": 1.0,
+            "f1": 0.8605,
+            "support": 16537
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            4158
+          ],
+          [
+            0,
+            0,
+            1203
+          ],
+          [
+            0,
+            0,
+            16537
+          ]
+        ]
+      },
+      "training_time_seconds": 3.6
+    },
+    "linear_svc": {
+      "display_name": "Linear SVM (Calibrated)",
+      "model_type": "LinearSVC + CalibratedClassifierCV",
+      "best_hyperparameters": {
+        "C": 0.1,
+        "class_weight": "balanced",
+        "calibrated": true
+      },
+      "cv_macro_f1_mean": 0.6963,
+      "cv_macro_f1_std": 0.0031,
+      "test_metrics": {
+        "accuracy": 0.9125,
+        "macro_precision": 0.7791,
+        "macro_recall": 0.6835,
+        "macro_f1": 0.7033,
+        "weighted_f1": 0.9013,
+        "per_class": {
+          "negative": {
+            "precision": 0.8413,
+            "recall": 0.8759,
+            "f1": 0.8583,
+            "support": 4158
+          },
+          "neutral": {
+            "precision": 0.5563,
+            "recall": 0.2012,
+            "f1": 0.2955,
+            "support": 1203
+          },
+          "positive": {
+            "precision": 0.9395,
+            "recall": 0.9735,
+            "f1": 0.9562,
+            "support": 16537
+          }
+        },
+        "confusion_matrix": [
+          [
+            3642,
+            74,
+            442
+          ],
+          [
+            367,
+            242,
+            594
+          ],
+          [
+            320,
+            119,
+            16098
+          ]
+        ]
+      },
+      "training_time_seconds": 148.2
+    },
+    "logistic_regression": {
+      "display_name": "Logistic Regression",
+      "model_type": "LogisticRegression",
+      "best_hyperparameters": {
+        "C": 5.0,
+        "class_weight": null
+      },
+      "cv_macro_f1_mean": 0.707,
+      "cv_macro_f1_std": 0.015,
+      "test_metrics": {
+        "accuracy": 0.9106,
+        "macro_precision": 0.78,
+        "macro_recall": 0.678,
+        "macro_f1": 0.6984,
+        "weighted_f1": 0.8989,
+        "per_class": {
+          "negative": {
+            "precision": 0.8384,
+            "recall": 0.8672,
+            "f1": 0.8526,
+            "support": 4158
+          },
+          "neutral": {
+            "precision": 0.5645,
+            "recall": 0.1929,
+            "f1": 0.2875,
+            "support": 1203
+          },
+          "positive": {
+            "precision": 0.937,
+            "recall": 0.9738,
+            "f1": 0.955,
+            "support": 16537
+          }
+        },
+        "confusion_matrix": [
+          [
+            3606,
+            85,
+            467
+          ],
+          [
+            355,
+            232,
+            616
+          ],
+          [
+            340,
+            94,
+            16103
+          ]
+        ]
+      },
+      "training_time_seconds": 127.6
+    },
+    "multinomial_nb": {
+      "display_name": "Multinomial Naive Bayes",
+      "model_type": "MultinomialNB",
+      "best_hyperparameters": {
+        "alpha": 0.1
+      },
+      "cv_macro_f1_mean": 0.6856,
+      "cv_macro_f1_std": 0.0024,
+      "test_metrics": {
+        "accuracy": 0.9005,
+        "macro_precision": 0.726,
+        "macro_recall": 0.6762,
+        "macro_f1": 0.6907,
+        "weighted_f1": 0.8921,
+        "per_class": {
+          "negative": {
+            "precision": 0.8277,
+            "recall": 0.8492,
+            "f1": 0.8383,
+            "support": 4158
+          },
+          "neutral": {
+            "precision": 0.4134,
+            "recall": 0.2161,
+            "f1": 0.2838,
+            "support": 1203
+          },
+          "positive": {
+            "precision": 0.9368,
+            "recall": 0.9632,
+            "f1": 0.9499,
+            "support": 16537
+          }
+        },
+        "confusion_matrix": [
+          [
+            3531,
+            160,
+            467
+          ],
+          [
+            336,
+            260,
+            607
+          ],
+          [
+            399,
+            209,
+            15929
+          ]
+        ]
+      },
+      "training_time_seconds": 39.3
+    },
+    "random_forest": {
+      "display_name": "Random Forest (trained on subsample)",
+      "model_type": "RandomForestClassifier",
+      "best_hyperparameters": {
+        "n_estimators": 50,
+        "max_depth": 20,
+        "class_weight": "balanced"
+      },
+      "cv_macro_f1_mean": 0.6856,
+      "cv_macro_f1_std": 0.0059,
+      "test_metrics": {
+        "accuracy": 0.8612,
+        "macro_precision": 0.6673,
+        "macro_recall": 0.7055,
+        "macro_f1": 0.6818,
+        "weighted_f1": 0.8697,
+        "per_class": {
+          "negative": {
+            "precision": 0.7817,
+            "recall": 0.8035,
+            "f1": 0.7925,
+            "support": 4158
+          },
+          "neutral": {
+            "precision": 0.2706,
+            "recall": 0.404,
+            "f1": 0.3241,
+            "support": 1203
+          },
+          "positive": {
+            "precision": 0.9496,
+            "recall": 0.9089,
+            "f1": 0.9288,
+            "support": 16537
+          }
+        },
+        "confusion_matrix": [
+          [
+            3341,
+            443,
+            374
+          ],
+          [
+            294,
+            486,
+            423
+          ],
+          [
+            639,
+            867,
+            15031
+          ]
+        ]
+      },
+      "training_time_seconds": 6.6,
+      "subsample_details": {
+        "size": 15000,
+        "sampling_method": "Stratified random subsample drawn from 87,592 train partition"
+      }
+    }
+  },
+  "generalization_gaps": {
+    "Linear SVM (Calibrated)": {
+      "cv_macro_f1": 0.6963,
+      "test_macro_f1": 0.7033,
+      "gap": -0.007,
+      "gap_pct": -1.0
+    },
+    "Logistic Regression": {
+      "cv_macro_f1": 0.707,
+      "test_macro_f1": 0.6984,
+      "gap": 0.0086,
+      "gap_pct": 1.22
+    },
+    "Multinomial Naive Bayes": {
+      "cv_macro_f1": 0.6856,
+      "test_macro_f1": 0.6907,
+      "gap": -0.0051,
+      "gap_pct": -0.74
+    },
+    "Random Forest (subsampled)": {
+      "cv_macro_f1": 0.6856,
+      "test_macro_f1": 0.6818,
+      "gap": 0.0038,
+      "gap_pct": 0.56
+    },
+    "Majority Baseline": {
+      "cv_macro_f1": 0.2868,
+      "test_macro_f1": 0.2868,
+      "gap": 0.0,
+      "gap_pct": 0.0
+    }
+  },
+  "threshold_tuning_oof": {
+    "method": "Out-of-fold probability multiplier tuned strictly on X_train",
+    "Linear SVM (Calibrated)": {
+      "optimal_neutral_multiplier": 2.9,
+      "train_oof_macro_f1_before": 0.6963,
+      "train_oof_macro_f1_after": 0.7389,
+      "test_macro_f1_before": 0.7033,
+      "test_macro_f1_after": 0.7372,
+      "test_neutral_f1_before": 0.2955,
+      "test_neutral_f1_after": 0.4096,
+      "test_neutral_recall_before": 0.2012,
+      "test_neutral_recall_after": 0.4165,
+      "improved": true
+    },
+    "Logistic Regression": {
+      "optimal_neutral_multiplier": 2.2,
+      "train_oof_macro_f1_before": 0.7076,
+      "train_oof_macro_f1_after": 0.7354,
+      "test_macro_f1_before": 0.6984,
+      "test_macro_f1_after": 0.7287,
+      "test_neutral_f1_before": 0.2875,
+      "test_neutral_f1_after": 0.3843,
+      "test_neutral_recall_before": 0.1929,
+      "test_neutral_recall_after": 0.35,
+      "improved": true
+    }
+  },
+  "bootstrap_significance_test": {
+    "resamples": 1000,
+    "Linear SVM (Calibrated)": {
+      "test_macro_f1": 0.7033,
+      "ci_95_lower": 0.6926,
+      "ci_95_upper": 0.7134
+    },
+    "Logistic Regression": {
+      "test_macro_f1": 0.6984,
+      "ci_95_lower": 0.6879,
+      "ci_95_upper": 0.7088
+    },
+    "difference (Linear_SVM - Logistic_Regression)": {
+      "mean_diff": 0.005,
+      "ci_95_lower": -0.002,
+      "ci_95_upper": 0.0121,
+      "is_significant": false,
+      "interpretation": "The 95% bootstrap confidence interval of the difference contains zero, indicating that the performance difference between Linear SVM and Logistic Regression is NOT statistically significant at the alpha=0.05 level."
+    }
+  },
+  "selected_best_model": {
+    "model_key": "linear_svc",
+    "display_name": "Linear SVM (Calibrated)",
+    "selection_metric": "cv_oof_macro_f1",
+    "cv_macro_f1": 0.6963,
+    "cv_macro_f1_std": 0.0031,
+    "train_oof_macro_f1_tuned": 0.7389,
+    "test_accuracy": 0.9125,
+    "test_macro_f1": 0.7033,
+    "test_macro_f1_tuned": 0.7372,
+    "test_neutral_f1": 0.2955,
+    "test_neutral_f1_tuned": 0.4096,
+    "optimal_neutral_multiplier": 2.9,
+    "selection_reason": "Linear SVM (Calibrated) with out-of-fold probability multiplier (2.90) was selected solely because it achieved the highest train out-of-fold (OOF) Macro F1 (0.7389) across all 87,592 training instances. The test set was held out and evaluated only once after final model selection was frozen (yielding 0.7372 test Macro F1, 90.45% accuracy, and 41.65% neutral recall). Bootstrap significance testing confirms that its performance difference with Logistic Regression is not statistically significant (95% CI [-0.0020, +0.0121] spans 0).",
+    "pipeline_artifact": "best_model.joblib"
+  },
+  "top_features": {
+    "source": "Logistic Regression multinomial coefficients",
+    "best_model_features": {
+      "negative": [
+        {
+          "word": "no",
+          "coefficient": 6.7663
+        },
+        {
+          "word": "worst",
+          "coefficient": 6.0727
+        },
+        {
+          "word": "not",
+          "coefficient": 5.8263
+        },
+        {
+          "word": "poor",
+          "coefficient": 5.4603
+        },
+        {
+          "word": "low",
+          "coefficient": 5.2202
+        },
+        {
+          "word": "not good",
+          "coefficient": 5.1302
+        },
+        {
+          "word": "very bad",
+          "coefficient": 4.8846
+        },
+        {
+          "word": "bad",
+          "coefficient": 4.7479
+        },
+        {
+          "word": "horrible",
+          "coefficient": 4.1525
+        },
+        {
+          "word": "worthless",
+          "coefficient": 4.0727
+        },
+        {
+          "word": "problem",
+          "coefficient": 3.9587
+        },
+        {
+          "word": "broken",
+          "coefficient": 3.6136
+        },
+        {
+          "word": "useless",
+          "coefficient": 3.5148
+        },
+        {
+          "word": "unsatisfactory",
+          "coefficient": 3.474
+        },
+        {
+          "word": "damaged",
+          "coefficient": 3.1696
+        }
+      ],
+      "neutral": [
+        {
+          "word": "average",
+          "coefficient": 4.549
+        },
+        {
+          "word": "ok",
+          "coefficient": 3.257
+        },
+        {
+          "word": "okk",
+          "coefficient": 2.5847
+        },
+        {
+          "word": "normal",
+          "coefficient": 2.4594
+        },
+        {
+          "word": "small",
+          "coefficient": 1.9809
+        },
+        {
+          "word": "avarage",
+          "coefficient": 1.7466
+        },
+        {
+          "word": "okay",
+          "coefficient": 1.7287
+        },
+        {
+          "word": "thin",
+          "coefficient": 1.7099
+        },
+        {
+          "word": "ball",
+          "coefficient": 1.5477
+        },
+        {
+          "word": "goodbut",
+          "coefficient": 1.2821
+        },
+        {
+          "word": "only",
+          "coefficient": 1.2662
+        },
+        {
+          "word": "high",
+          "coefficient": 1.2565
+        },
+        {
+          "word": "quality product",
+          "coefficient": 1.2504
+        },
+        {
+          "word": "medium",
+          "coefficient": 1.2258
+        },
+        {
+          "word": "very small",
+          "coefficient": 1.2106
+        }
+      ],
+      "positive": [
+        {
+          "word": "good",
+          "coefficient": 7.4923
+        },
+        {
+          "word": "super",
+          "coefficient": 6.1932
+        },
+        {
+          "word": "best",
+          "coefficient": 6.1461
+        },
+        {
+          "word": "not bad",
+          "coefficient": 6.0827
+        },
+        {
+          "word": "awesome",
+          "coefficient": 5.3668
+        },
+        {
+          "word": "excellent",
+          "coefficient": 4.9525
+        },
+        {
+          "word": "nice",
+          "coefficient": 4.2762
+        },
+        {
+          "word": "wonderful",
+          "coefficient": 4.2643
+        },
+        {
+          "word": "and",
+          "coefficient": 4.1992
+        },
+        {
+          "word": "great",
+          "coefficient": 4.0394
+        },
+        {
+          "word": "fabulous",
+          "coefficient": 3.8382
+        },
+        {
+          "word": "brilliant",
+          "coefficient": 3.7224
+        },
+        {
+          "word": "amazing",
+          "coefficient": 3.609
+        },
+        {
+          "word": "terrific",
+          "coefficient": 3.5786
+        },
+        {
+          "word": "very nice",
+          "coefficient": 3.5584
+        }
+      ]
+    }
+  },
+  "error_analysis": {
+    "patterns": [
+      "Negation Complexity: Reviews with contrastive conjunctions or separated negations (e.g., 'not bad at all, actually good') confuse linear bag-of-words boundaries.",
+      "Sarcasm & Mixed Sentiment: Sarcastic remarks (e.g., 'great if you enjoy burning your money') contain high-frequency positive tokens like 'great' leading to false-positive classification.",
+      "Neutral Boundary Ambiguity: Purely factual statements ('arrived on time', 'it is okay') get pulled into positive or negative due to weak sentiment intensity.",
+      "Label Noise / Star Divergence: Customer reviews where 5-star rating contradicted critical review text create divergence with pure textual polarity."
+    ],
+    "samples_by_class": {
+      "negative": [
+        {
+          "text": "the colour is dull",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "brilliant killer entry level dslr",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "decent product 5 star to flipkart delivery received product in 12 hours quality is good but received 2 plates with small defects",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "foot comes out from toeside",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "decent product need to make a cut for the charging cable both side",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "good not bad but its pain full",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "pretty good little bit noisy",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "highly recommended nice and stiff cloth but now the cloth material has been degraded",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "not specified waist of money",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "not specified nice watch in this price but belt quality is not good",
+          "true_label": "negative",
+          "predicted_label": "positive"
+        }
+      ],
+      "neutral": [
+        {
+          "text": "good choice sound quality was good but there is no bass controller",
+          "true_label": "neutral",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "expected a better product simply",
+          "true_label": "neutral",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "horrible smell to much",
+          "true_label": "neutral",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "best in the market! this is really a use full things",
+          "true_label": "neutral",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "awesome ameging",
+          "true_label": "neutral",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "bad quality okay",
+          "true_label": "neutral",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "fair sound not sufficient",
+          "true_label": "neutral",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "worth the money for mild winterquality is ok",
+          "true_label": "neutral",
+          "predicted_label": "positive"
+        },
+        {
+          "text": "worst experience ever! size will be small",
+          "true_label": "neutral",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "very good good but there is no temper glass to protect by scratch",
+          "true_label": "neutral",
+          "predicted_label": "positive"
+        }
+      ],
+      "positive": [
+        {
+          "text": "did not meet expectations good product",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "expected a better product good product but this product is not available received call process",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "slightly disappointed dont buy they claim 30 hours battery backupbut actuall time is 10hr comfort is big issue not upto the mark better go for realme buds 2audi\u2026",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "very poor nice",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "waste of money! seeds quality not good waste seeds",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "hated it! poor qualityno strong",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "utterly disappointed none of the responsible person has come for installation after 15 days despite of complaining at flipcart customer care finally i am going \u2026",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        },
+        {
+          "text": "good quality product ok for this price no complaints",
+          "true_label": "positive",
+          "predicted_label": "neutral"
+        },
+        {
+          "text": "decent product not bad but noise too high",
+          "true_label": "positive",
+          "predicted_label": "neutral"
+        },
+        {
+          "text": "does the job good but not that much",
+          "true_label": "positive",
+          "predicted_label": "negative"
+        }
+      ]
+    }
+  },
+  "timestamp_utc": "2026-11-21T17:26:27.006772+00:00"
+}
